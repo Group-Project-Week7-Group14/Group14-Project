@@ -73,20 +73,35 @@ io.on('connection', (socket) => {
 
   socket.on('getQuestion', (data) => {
     console.log('getQuestion dari client >>>', data);
-    socket.emit("sendQuestion", questions)
+    questions.forEach(e => {
+      if (e.id === data.questionId) {
+        socket.emit("sendQuestion", e)
+      }
+    })
   })
 
   socket.on('answer', (data) => {
-    console.log('answer dari client >>>', data); // data => {id, index}
+    console.log('answer dari client >>>', data);
     let answerResult = false
     questions.forEach(e => {
-      if (e.id === data.id) {
+      if (e.id === data.questionId) {
         if (e.answer === data.index) {
           answerResult = true
         }
       }
     })
-    socket.broadcast.emit("sendAnswerResult", answerResult)
+    if (answerResult) {
+      let newScore
+      users.forEach(e => {
+        if (e.id === data.userId) {
+          e.score += 10
+        }
+        newScore = e.score
+      })
+      socket.broadcast.emit("sendAnswerResult", {answerResult, newScore})
+    } else {
+      socket.broadcast.emit("sendAnswerResult", {answerResult})
+    }
   })
 
   socket.on('getScore', (data) => {
