@@ -108,7 +108,7 @@ io.on('connection', (socket) => {
     console.log('getScore dari client >>>', data);
     let score = 0
     users.forEach(e => {
-      if (e.id === data.id) {
+      if (e.id === data.userId) {
         score = e.score
       }
     })
