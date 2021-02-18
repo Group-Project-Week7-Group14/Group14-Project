@@ -1,5 +1,5 @@
 const app = require('express')();
-const http = require('http').Server(app);
+const http = require('http').createServer(app);
 const io = require('socket.io')(http);
 
 const questions = [
@@ -100,7 +100,7 @@ io.on('connection', (socket) => {
     socket.broadcast.emit("sendScore", score)
   })
 
-  
+
   socket.on('username', (data) => {
     console.log('username dari client >>>', data);
     if (users.length !== 5) {

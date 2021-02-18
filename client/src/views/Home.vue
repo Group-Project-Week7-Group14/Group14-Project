@@ -1,6 +1,5 @@
 <template>
-  <div class="home">
-    <h1>this is an home page</h1>
+  <div class="home text-center">
     <img alt="Vue logo" src="../assets/logo.png" />
     <div class="row justify-content-center">
       <div class="col-4">
