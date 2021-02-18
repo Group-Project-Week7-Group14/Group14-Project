@@ -1,12 +1,22 @@
 <template>
   <section>
-    <div id="option">A. Capek</div>
+    <div @click="answer" id="option">{{ huruf }}. {{ option }}</div>
   </section>
 </template>
 
 <script>
 export default {
-
+  props: ['option', 'huruf', 'index'],
+  methods: {
+    answer() {
+      let id = Number(this.$store.state.question.id)
+      this.$socket.emit('answer', {
+        questionId: id,
+        username: localStorage.getItem('username'),
+        index: Number(this.index)
+      });
+    }
+  }
 }
 </script>
 

@@ -1,12 +1,12 @@
 <template>
   <section>
-    <div id="question">Apa yang kamu rasakan setelah belajar vue ?</div>
+    <div id="question">{{ question }}</div>
   </section>
 </template>
 
 <script>
 export default {
-
+  props: ['question']
 }
 </script>
 
