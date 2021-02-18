@@ -66,7 +66,7 @@ const questions = [
 ]
 
 let id = 0
-const users = []
+let users = []
 
 io.on('connection', (socket) => {
   console.log('a user connected');
@@ -75,17 +75,22 @@ io.on('connection', (socket) => {
     console.log('getQuestion dari client >>>', data);
     questions.forEach(e => {
       if (e.id === data.questionId) {
-        socket.emit("sendQuestion", e)
+        io.emit("sendQuestion", e)
       }
     })
   })
 
+  socket.on('start', () => {
+    io.emit("start", true);
+  });
+
   socket.on('answer', (data) => {
     console.log('answer dari client >>>', data);
     let answerResult = false
+    let id = Number(data.questionId);
     questions.forEach(e => {
-      if (e.id === data.questionId) {
-        if (e.answer === data.index) {
+      if (e.id == data.questionId) {
+        if (e.answer == data.index) {
           answerResult = true
         }
       }
@@ -93,15 +98,14 @@ io.on('connection', (socket) => {
     if (answerResult) {
       let newScore
       users.forEach(e => {
-        if (e.id === data.userId) {
+        if (e.username == data.username) {
           e.score += 10
         }
         newScore = e.score
       })
-      socket.broadcast.emit("sendAnswerResult", {answerResult, newScore})
-    } else {
-      socket.broadcast.emit("sendAnswerResult", {answerResult})
+      io.emit("sendQuestion", questions[id + 1]);
     }
+    io.emit("users", users);
   })
 
   socket.on('getScore', (data) => {
@@ -115,22 +119,27 @@ io.on('connection', (socket) => {
     socket.broadcast.emit("sendScore", score)
   })
 
-
   socket.on('username', (data) => {
     console.log('username dari client >>>', data);
-    let newUser = {
+    id++
+    users.push({
       id,
       username: data.username,
       score: 0
-    }
+    })
+    io.emit("users", users);
+  })
 
-    if (users.length !== 5) {
-      id++
-      users.push(newUser)
-      socket.broadcast.emit("loginSuccess", newUser)
-    } else {
-      socket.broadcast.emit("loginFail", 'Login Fail')
-    }
+  socket.on('logout', (data) => {
+    console.log('username dari client >>>', data);
+    let penampung = []
+    users.forEach(e => {
+      if (e.username !== data.username) {
+        penampung.push(e);
+      }
+    })
+    users = penampung;
+    io.emit("users", users);
   })
 });
 

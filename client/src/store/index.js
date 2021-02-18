@@ -6,7 +6,8 @@ Vue.use(Vuex)
 export default new Vuex.Store({
   state: {
     question: {},
-    players: [],
+    users: [],
+    isStart: false
   },
   mutations: {
     getQuestion(state, payload) {
@@ -14,14 +15,24 @@ export default new Vuex.Store({
     },
     getPlayers(state, payload) {
       state.players = payload;
+    },
+    start(state, payload) {
+      state.isStart = payload;
+    },
+    users(state, payload) {
+      state.users = payload
     }
   },
   actions: {
-    SOCKET_question(context, payload) {
+    SOCKET_sendQuestion(context, payload) {
       context.commit('getQuestion', payload);
+      console.log(payload);
     },
-    SOCKET_players(context, payload) {
-      context.commit('getPlayers', payload);
+    SOCKET_start(context, paload) {
+      context.commit('start', paload);
+    },
+    SOCKET_users(context, payload) {
+      context.commit('users', payload);
     }
   }
 })
