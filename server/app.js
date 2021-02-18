@@ -1,11 +1,16 @@
-const express = require('express')
-const app = express()
-const port = process.env.PORT || 3000
-const cors = require('cors')
-const router = require('./routers/router')
+const app = require('express')();
+const http = require('http').Server(app);
+const io = require('socket.io')(http);
 
-app.use(cors())
-app.use(express.json())
-app.use(express.urlencoded({extended: true}))
 
-app.use(router)
+io.on('connection', (socket) => {
+  console.log('a user connected');
+
+  socket.on('getQuestion', (data) => {
+    console.log('dari client >>>', data);
+  })
+});
+
+http.listen(3000, () => {
+  console.log('listening on *:3000');
+});
