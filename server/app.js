@@ -65,13 +65,8 @@ const questions = [
   }
 ]
 
-const users = [
-  {
-    id: 1,
-    name: A,
-    score: 0
-  }
-]
+let id = 0
+const users = []
 
 io.on('connection', (socket) => {
   console.log('a user connected');
@@ -103,6 +98,22 @@ io.on('connection', (socket) => {
       }
     })
     socket.broadcast.emit("sendScore", score)
+  })
+
+  
+  socket.on('username', (data) => {
+    console.log('username dari client >>>', data);
+    if (users.length !== 5) {
+      id++
+      users.push({
+        id,
+        username: data.username,
+        score: 0
+      })
+      socket.broadcast.emit("loginSuccess", 'Login Success')
+    } else {
+      socket.broadcast.emit("loginFail", 'Login Fail')
+    }
   })
 });
 
