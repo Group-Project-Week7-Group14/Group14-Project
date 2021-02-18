@@ -7,7 +7,7 @@ const questions = [
     id: 1,
     question: "Siapa penyanyi yang suka sepedahan?",
     answer: 0,
-    options: ['Selena Gowes', 'Bambang tabung gas', 'Bambang tabung gas', 'Ed seret']
+    options: ['Selena Gowes', 'Bambang tabung gas', 'Justin Bibir', 'Ed seret']
   },
   {
     id: 2,
