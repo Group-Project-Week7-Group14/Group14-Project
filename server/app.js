@@ -118,14 +118,16 @@ io.on('connection', (socket) => {
 
   socket.on('username', (data) => {
     console.log('username dari client >>>', data);
+    let newUser = {
+      id,
+      username: data.username,
+      score: 0
+    }
+
     if (users.length !== 5) {
       id++
-      users.push({
-        id,
-        username: data.username,
-        score: 0
-      })
-      socket.broadcast.emit("loginSuccess", 'Login Success')
+      users.push(newUser)
+      socket.broadcast.emit("loginSuccess", newUser)
     } else {
       socket.broadcast.emit("loginFail", 'Login Fail')
     }
