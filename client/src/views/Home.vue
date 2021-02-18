@@ -1,15 +1,36 @@
 <template>
   <div class="home">
     <h1>this is an home page</h1>
+    <img alt="Vue logo" src="../assets/logo.png" />
+    <div class="row justify-content-center">
+      <div class="col-4">
+        <Question></Question>
+        <div class="row justify-content-around mt-4">
+          <div class="col">
+            <Option></Option>
+          </div>
+          <div class="col">
+            <Option></Option>
+          </div>
+        </div>
+        <div class="row justify-content-around mt-4">
+          <div class="col">
+            <Option></Option>
+          </div>
+          <div class="col">
+            <Option></Option>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 </template>
 
 <script>
-// @ is an alias to /src
-
+import Question from '../components/Question.vue';
+import Option from '../components/Option.vue';
 export default {
   name: 'Home',
-  components: {
-  }
+  components: {Question, Option}
 }
 </script>
