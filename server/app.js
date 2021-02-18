@@ -7,7 +7,7 @@ const questions = [
     id: 1,
     question: "Siapa penyanyi yang suka sepedahan?",
     answer: 0,
-    options: ['Selena Gowes', 'Bambang tabung gas', 'Bambang tabung gas', 'Ed seret']
+    options: ['Selena Gowes', 'Bambang tabung gas', 'Justin Bibir', 'Ed seret']
   },
   {
     id: 2,
@@ -112,7 +112,7 @@ io.on('connection', (socket) => {
     console.log('getScore dari client >>>', data);
     let score = 0
     users.forEach(e => {
-      if (e.id === data.id) {
+      if (e.id === data.userId) {
         score = e.score
       }
     })
