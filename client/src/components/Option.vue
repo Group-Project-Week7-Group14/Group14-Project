@@ -1,6 +1,8 @@
 <template>
   <section>
-    <div @click="answer" id="option">{{ huruf }}. {{ option }}</div>
+    <div @click="answer" class="my-2" id="option">
+      {{ huruf }}. {{ option }}
+    </div>
   </section>
 </template>
 
@@ -22,13 +24,19 @@ export default {
 
 <style>
 #option {
-  width: 100%;
-  height: 5vh;
+  width: 250px;
   background-color: rgb(32, 4, 58);
   color: white;
   display: flex;
   align-items: center;
   justify-content: center;
   border-radius: 10px;
+  padding: 10px 10px;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+#option:hover {
+  background-color: rgb(89, 66, 110);
 }
 </style>

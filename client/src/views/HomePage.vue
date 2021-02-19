@@ -2,57 +2,51 @@
   <div id="home-page">
     <div class="player-list">
       <h3>Player List</h3>
-      <hr>
+      <hr />
       <div class="card-lists">
-        <PlayerCard/>
-        <PlayerCard/>
-        <PlayerCard/>
-        <PlayerCard/>
-        <PlayerCard/>
-        <PlayerCard/>
+        <PlayerCard />
+        <PlayerCard />
+        <PlayerCard />
+        <PlayerCard />
+        <PlayerCard />
+        <PlayerCard />
       </div>
     </div>
 
     <div class="start" v-if="condition_start">
       <h1>What are you waiting for?</h1>
-      <h3>Start game</h3><br>
-      <button class="btn-lg btn-outline-primary" id="startButton" style="width:150px; border-radius:20px" @click="showQuestion">Start</button>
+      <h3>Start game</h3>
+      <br />
+      <button
+        class="btn-lg btn-outline-primary"
+        id="startButton"
+        style="width: 150px; border-radius: 20px"
+        @click="showQuestion"
+      >
+        Start
+      </button>
     </div>
-    <!-- <div class="row justify-content-center question-box">
-      <div class="col-4">
-        <Question></Question>
-        <div class="row justify-content-around mt-4">
-          <div class="col">
-            <Option></Option>
-          </div>
-          <div class="col">
-            <Option></Option>
-          </div>
-        </div>
-        <div class="row justify-content-around mt-4">
-          <div class="col">
-            <Option></Option>
-          </div>
-          <div class="col">
-            <Option></Option>
-          </div>
-        </div>
-      </div>
-    </div> -->
     <div v-if="condition" class="question-box">
       <div class="question">
-         <Question></Question>
+        <Question></Question>
       </div>
       <div class="options">
-         <Option></Option>
-         <Option></Option>
-         <Option></Option>
-         <Option></Option>
+        <Option></Option>
+        <Option></Option>
+        <Option></Option>
+        <Option></Option>
       </div>
     </div>
 
     <div class="exit">
-      <button class="btn-lg btn-outline-danger" id="exitButton" style="width:150px; border-radius:20px" @click="exitGame">Exit Game</button>
+      <button
+        class="btn-lg btn-outline-danger"
+        id="exitButton"
+        style="width: 150px; border-radius: 20px"
+        @click="exitGame"
+      >
+        Exit Game
+      </button>
     </div>
   </div>
 </template>
@@ -93,7 +87,7 @@ export default {
   display: flex;
 }
 
-.question-box{
+.question-box {
   width: 40%;
   height: 50vh;
   margin-left: 200px;
@@ -121,7 +115,7 @@ export default {
 .card-lists {
   height: 40vh;
 }
-.card-lists{
+.card-lists {
   overflow: auto;
 }
 
@@ -134,6 +128,6 @@ export default {
 .exit {
   position: absolute;
   left: 7%;
-  top: 77%
+  top: 77%;
 }
 </style>

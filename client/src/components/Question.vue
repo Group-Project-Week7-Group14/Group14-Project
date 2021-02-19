@@ -20,5 +20,6 @@ export default {
   align-items: center;
   justify-content: center;
   border-radius: 20px;
+  text-align: center;
 }
 </style>
